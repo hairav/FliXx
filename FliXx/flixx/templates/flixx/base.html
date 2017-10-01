@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'flixx/css/bootstrap.min.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <div class="container-fluid">
+     <div class="navbar navbar-default float-right">
+         <div class="navbar-header float-left">
+    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand bg-success" href="/FliXx/">FliXx</a>
+        </div>
+        <center>
+            <div class="navbar-collapse navbar-left collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/FliXx/watched-movies">Movies watched</a>
+                    </li>
+
+                    <li><a href="/FliXx/recommend">Recommend</a>
+                    </li>
+                    <li><a href="#">Explore all movies</a>
+                    </li>
+                    <li><a href="#">Upcoming</a>
+                    </li>
+                    <li class="float-right"><a href="/FliXx/login">{{ s }}</a>
+                    </li>
+                </ul>
+
+            </div>
+        </center>
+    </div>
+</div>
+      </div><!-- /.container-fluid -->
+    </nav></div>
+  <div><center><strong><h2>{{ message }}</h2></strong></center></div>
+    {% block content %}{% endblock %}
+
+  <div>
+<span class="container">
+<hr style="color:#23527c">
+<ol class="panel-footer">
+    <li><a href=""><h6 class="panel-footer">About FliXx</h6></a> </li>
+    <li><a href="/FliXx/aboutus"><h6 class="panel-footer">About Us</h6></a></li>
+</ol>
+
+</span></div>
+</body>
+</html>

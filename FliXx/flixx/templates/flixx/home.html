@@ -1,0 +1,34 @@
+{% extends 'flixx/base.html' %}
+{% block title %}FliXx | Home{% endblock %}
+{% block content %}
+    <div>
+        {% include 'flixx/description.html' %}
+    <center><strong><h2>Latest Movies</h2></strong></center>
+            {% if 'Username' not in request.session %}<h1><center><b>{{ message }}</b></center></h1>
+
+                    <div class="col-sm-9 row" style="width: 70%;float: left; height:70%;overflow: auto;">
+                        {% for movie in movies %}
+                            <div class="float-left">
+
+                                    {% include 'flixx/thumnails.html' %}
+
+                            </div>
+                    {% endfor %}
+
+                    </div>
+                <span class="col-sm-3 float-right" ">
+                            {% include 'flixx/form.html' %}
+                        </span>
+            {% else %}
+                <span class="col-sm-12">
+                    {% for movie in movies %}
+                        <span class="float-left">
+
+                                {% include 'flixx/thumnails.html' %}
+
+                        </span>
+                    {% endfor %}
+                </span>
+            {% endif %}
+    </div>
+{% endblock %}

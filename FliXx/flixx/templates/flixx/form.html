@@ -1,0 +1,14 @@
+<div class="form-group">
+<form class="form-horizontal" method="post" action="{{ url }}">{% csrf_token %}
+{% for field in form %}
+    <div class="fieldWrapper" style="padding: 1%">
+                    {{ field.errors }}
+                    <span class="float-left">{{ field.label_tag }}</span> <span class="float-right">{{ field }}</span>
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+                      <input type="submit" class="btn btn-success" value={{ action }}>
+</form></div>

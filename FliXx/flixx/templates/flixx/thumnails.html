@@ -1,0 +1,41 @@
+<div class="container" style="border: double darkolivegreen">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-3" >
+						
+						<div class="preview-pic tab-content">
+
+						</div>
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+
+						</ul>
+						
+					</div>
+					<div class="details col-md-6" style="background-color: #faf2cc">
+						<h3 class="product-title">{{ movie.title }}</h3>
+						<div class="rating">
+							<div class="stars">
+                                {% for i in 'dafdfa'  %}
+								    <span class="fa fa-star checked"></span>
+								{% endfor %}
+                                {% for i in 'asdf' %}
+								    <span class="fa fa-star"></span>
+                                {% endfor %}
+							</div>
+							<span class="review-no">{{ movie.nutr }} reviews</span>
+						</div>
+						<p class="product-description">{{ movie.tag }}</p>
+						<h4 class="price">Running time <span>{{ movie.runtime }} minutes</span></h4>
+						<p>{{ movie.overview }}</p>
+						<div class="action">
+                            <a href="/FliXx/{{ movie.id }}"><button class="add-to-cart btn btn-success" type="button">Find more</button></a>
+                            <a href="/FliXx/{{ movie.id }}/1"><button class="like btn btn-primary" type="button"><span class="fa fa-heart">like</span></button></a>
+                            <a href="/FliXx/{{ movie.id }}/0"><button class="like btn btn-primary" type="button"><span class="fa fa-heart">Dislike</span></button></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

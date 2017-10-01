@@ -1,0 +1,13 @@
+{% extends 'flixx/base.html' %}
+{% block title %}
+    FLiXx | Recommendations
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+    <center><strong><h2></h2></strong></center>
+    <br><center><strong><h4><a href="/FliXx/recommend">Tune your recommendations .</a> </h4></strong></center>
+
+        {% for movie in li %}
+        {% include 'flixx/thumnails.html' %}
+    {% endfor %}
+{% endblock %}

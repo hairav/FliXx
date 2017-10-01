@@ -1,0 +1,18 @@
+{% extends 'flixx/base.html' %}
+{% block title %}
+    FLiXx | Watched-Movies
+{% endblock %}
+{% block content %}
+    <div class="col-md-12" style="background-color: #23527c">
+    <center><strong><h2>Liked Movies</h2></strong></center>
+    {% for movie in li %}
+        {% include 'flixx/thumnails.html' %}
+    {% endfor %}
+    </div>
+    <div class="col-md-12" style="background-color: #5e5e5e">
+    <center><strong><h2>Disliked Movies</h2></strong></center>
+    {% for movie in di %}
+        {% include 'flixx/thumnails.html' %}
+    {% endfor %}
+    </div>
+{% endblock %}

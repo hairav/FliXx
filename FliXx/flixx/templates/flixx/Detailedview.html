@@ -1,0 +1,64 @@
+{% extends 'flixx/base.html' %}
+{% block title %}
+    FliXx | Movie no. {{ movie.id }}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid" style="background-color: #4cae4c">
+        <center>
+            <ul>
+                {% for i in g %}
+                    <li>{{ i }}</li>
+                {% endfor %}
+            </ul>
+            <hr>
+        <ol>
+            <li><button class="btn btn-primary" type="button">
+            Budget     <span class="badge">{{ movie.Budget }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Title     <span class="badge">{{ movie.title }}</span><br>
+            </button>
+        <li>    <button class="btn btn-primary" type="button">
+            Tag     <span class="badge">{{ movie.tag }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Status     <span class="badge">{{ movie.status }}</span><br>
+            </button>
+        <li>    <button class="btn btn-primary" type="button">
+            Link to website     <span class="badge">{{ movie.url }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Description     <span class="badge">{{ movie.overview }}</span><br>
+            </button>
+        <li>    <button class="btn btn-primary" type="button">
+            popularity quantified     <span class="badge">{{ movie.popularity }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Earnings($)  <span class="badge">{{ movie.revenue }}</span><br>
+            </button>
+        <li>    <button class="btn btn-primary" type="button">
+            Length(min)     <span class="badge">{{ movie.runtime }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Release Date    <span class="badge">{{ movie.dateofrelease }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            Rating     <span class="badge">{{ movie.averagerating }}</span><br>
+            </button>
+            <li><button class="btn btn-primary" type="button">
+            no of people who rated     <span class="badge">{{ movie.nutr }}</span><br>
+            </button></ol>
+
+        </center>
+    </div>
+    <div>
+        {% for review in reviews %}
+            <div>{{ review.user }} has these views on the movie :-</div><center><span>{{ review.l }}</span></center>
+        {% endfor %}
+    </div>
+    <div>
+    {% if not reviewed %}
+        {% include 'flixx/form.html' %}
+    {% endif %}
+    </div>
+{% endblock %}
