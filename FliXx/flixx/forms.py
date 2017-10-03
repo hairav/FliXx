@@ -13,3 +13,6 @@ class LogIn(forms.Form):
    Password=forms.CharField(widget=forms.PasswordInput())
 class reviewing(forms.Form):
     review=forms.CharField(max_length=500)
+
+class search (forms.Form):
+    Search = forms.CharField(max_length=50)

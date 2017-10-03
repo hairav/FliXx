@@ -1,0 +1,23 @@
+{% extends 'flixx/base.html' %}
+{% block title %}FliXx | Home{% endblock %}
+{% block content %}
+    <div>
+
+    <center><strong><h2>Popular Movies</h2></strong></center>
+
+                    <div class="col-sm-9 row" style="width: 70%;float: left; height:70%;overflow: auto;">
+                        {% for movie in movies %}
+                            <div class="float-left">
+
+                                    {% include 'flixx/thumnails.html' %}
+
+                            </div>
+                    {% endfor %}
+
+                    </div>
+                <span class="col-sm-3 float-right">
+                            {% include 'flixx/form.html' %}
+                        </span>
+
+    </div>
+{% endblock %}

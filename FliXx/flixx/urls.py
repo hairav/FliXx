@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^recommend/$', views.recommend, name='recommend'),
     url(r'^watched-movies/$', views.watchedmovies ,name='watched-movies'),
     url(r'^aboutus/$', views.about_us , name='about us'),
+    url(r'^Xplore/$',views.find,name='search')
 ]

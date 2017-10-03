@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from flixx.forms import  SignUp
-from flixx.forms import  LogIn,reviewing
+from django.db.models import Q
+from flixx.forms import  LogIn,reviewing,search
 from flixx.models import user,movie,Genre,like,review
 from django.http import HttpResponse
 import numpy
@@ -78,16 +79,48 @@ def detailedview(request ,id):
     form=''
     reviewed = False
     l='/FliXx/'+str(id)
-    if request.method=="POST":
-        form=reviewing(request.POST,request.FILES)
-        if form.is_valid():
-            s=form.cleaned_data['review']
-            rew=review()
-            rew.l=s
-            rew.user=user.objects.get(Username=request.session['Username'])
-            rew.movie=movie.objects.get(id=id)
-            rew.save()
-            return detailedview(request,id)
+    if request.method=="POST" :
+        if 'Username' in request.session:
+            form=reviewing(request.POST,request.FILES)
+            if form.is_valid():
+                s=form.cleaned_data['review']
+                rew=review()
+                rew.l=s
+                rew.user=user.objects.get(Username=request.session['Username'])
+                rew.movie=movie.objects.get(id=id)
+                rew.save()
+                if 'Username' in request.session:
+                    a = 'LogOut'
+
+                    re = review.objects.filter(movie=movie.objects.get(id=id))
+                    for i in re:
+                        if i.user == user.objects.get(Username=request.session['Username']):
+                            reviewed = True
+                            break
+                    else:
+                        form = reviewing()
+                for i in movies:
+                    if int(id) == int(i.id):
+                        s = set()
+                        g = []
+                        for j in i.genres.all():
+                            if j.Name not in s:
+                                if j not in g:
+                                    g.append(j)
+                        print (form)
+                        return render(request, 'flixx/Detailedview.html',
+                                      {'reviewed': reviewed, 'url': l, 'action': 'review', 'form': form, 'reviews': re,
+                                       'g': g, 's': a, 'movie': i, 'message': message})
+                message = "Your Credentials did not match any existing movie data please try again."
+
+                form = SignUp()
+                url = '/FliXx/login/'
+
+                return render(request, 'flixx/login.html',
+                              {'s': a, 'message': message, 'url': url, 'form': form, 'action': "LogIn"})
+        else:
+            return login(request)
+
     if 'Username' in request.session:
         a = 'LogOut'
 
@@ -212,3 +245,29 @@ def about_us(request):
         a='LogOut'
         message='Hey '+str(user.objects.get(Username=request.session['Username']))
     return render(request,'flixx/about us.html',{'s':a,'message':message})
+def find(request):
+    if request.method=="POST":
+        form=search(request.POST,request.FILES)
+        if form.is_valid():
+            q = form.cleaned_data['Search']
+            mov=[]
+            for i in movies:
+                if q in i.title or q in i.tag or q in i.overview:
+                    mov.append(i)
+            mov=sorted(mov,key=lambda x:x.popularity)
+            mov.reverse()
+            message=str(len(mov))+" results obtained as a result of your search "+q
+            return render(request, 'flixx/explore.html',
+                          {'movies': mov,'message':message})
+        else:
+            form = search()
+            url = '/FliXx/Xplore/'
+            action = 'Search'
+            return render(request, 'flixx/explore.html',
+                          {'movies': movies.order_by('-popularity')[:50], 'url': url, 'action': action, 'form': form})
+
+    else:
+        form=search()
+        url='/FliXx/Xplore/'
+        action='Search'
+        return render(request,'flixx/explore.html',{'movies':movies.order_by('-popularity')[:50],'url':url,'action':action,'form':form})

@@ -32,7 +32,7 @@ class user(models.Model):
     Name=models.CharField(max_length=100)
     Password=models.CharField(max_length=15)
     def __str__(self):
-        return self.Name+'\n (@'+str(self.Username)+')'
+        return self.Name+'\n (@'+str(self.Username)+')'+' '+self.Password
 class like(models.Model):
     user=models.ForeignKey(user)
     movie=models.ForeignKey(movie)
